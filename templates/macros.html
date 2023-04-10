@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>宏的使用</title>
+</head>
+<body>
+{% macro render_button(text, url) %}
+    <a href="{{ url }}" class="button">{{ text }}</a>
+{% endmacro %}
+
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+
+    {% extends 'base.html' %}
+    {% block content%}
+    <article>
+        <aside class="left">
+            左侧内容区域--问答
+        </aside>
+        <aside class="right">
+            右侧内容区域--问答
+        {% include 'sidebar.html' %}
+        </aside>
+    </article>
+    {% endblock %}

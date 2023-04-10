@@ -1,5 +1,6 @@
 from flask import Flask , current_app,g,request,make_response,render_template,redirect,abort,render_template_string,render_template#导入库
 app=Flask(__name__)#创建实例
+app.config["DEBUG"] = True
 
 "在html中，{{变量名}}"
 @app.route('/current')
@@ -58,7 +59,7 @@ def test_response():
 
     #响应html
     html="<html><h style='color:#f00'>HTML文本显示</h><body></body></html>"#直接写，不规范
-    htmls = render_template('index.html')
+    htmls = render_template('kate.html')
     resp=make_response(htmls,400)
     return resp
 
@@ -95,6 +96,46 @@ def moban():
     name='帅哥'#替换变量or创建字典
     user_info={'add':'温州'}
     return render_template('kate.html',age=age,name=name,user_info=user_info)#自动获取指定html进行渲染
+
+"模版标签,模版是可以在html中变量，而tag是指在html中写一些逻辑判断"
+
+@app.route('/tag')
+def tag():
+    var=1
+    return render_template('tag.html',var=var)
+
+"""
+过滤器的使用  |
+safe:图文转义
+"""
+@app.route('/filter')
+def filter():
+    wecome='hello,luck'
+    phone='13712345672'
+    return render_template('filer.html',wecome=wecome,phone=phone)
+
+"自定义过滤器"
+
+@app.template_filter('phone_format')#过滤器名
+def phone_format(phone):
+    "电话号码脱敏"
+    return phone[0:3]+'****'+phone[7:]
+
+"全局参数：直接写在html里面" \
+"跳转 url_for"
+
+@app.route('/url_ok')
+def url_ok():
+
+    return render_template('url_ok.html')
+
+
+"""
+宏，就类似与python的函数，可以直接写在html中，也可以专门写在一个html里，在别的html里面调用" \
+调用举例：{% from "macros.html" import render_button %}
+
+
+"""
 
 
 if __name__ == '__main__':# 第一种启动方式，但不推荐
