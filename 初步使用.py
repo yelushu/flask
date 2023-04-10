@@ -1,7 +1,7 @@
-from flask import Flask , current_app,g,request,make_response,render_template,redirect,abort#导入库
+from flask import Flask , current_app,g,request,make_response,render_template,redirect,abort,render_template_string,render_template#导入库
 app=Flask(__name__)#创建实例
 
-
+"在html中，{{变量名}}"
 @app.route('/current')
 def index():
     print(app)
@@ -86,6 +86,16 @@ def to_kate():
     htmls = render_template('kate.html')
     resp=make_response(htmls,400)
     return resp
+
+
+@app.route('/moban')
+def moban():
+    #return render_template_string("hello")#自动渲染字符串
+    age=8
+    name='帅哥'#替换变量or创建字典
+    user_info={'add':'温州'}
+    return render_template('kate.html',age=age,name=name,user_info=user_info)#自动获取指定html进行渲染
+
 
 if __name__ == '__main__':# 第一种启动方式，但不推荐
     app.run()
