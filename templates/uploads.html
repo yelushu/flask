@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传教学</title>
+</head>
+<body>
+<form action ="{{url_for('uploads')}}" method="post" enctype="multipart/form-data">
+       {{form.csrf_token}}
+    <p>
+        {{form.avatar.label}}
+        {{form.avatar}}
+    </p>
+<p>
+    <input type="submit" name="上传">
+</p>
+</form>
+
+</body>
+</html>
